@@ -254,6 +254,16 @@ router.post('/api/postcomment', function (req, res) {
     }
 })
 
+router.get('/api/getimgcategory', function(req,res){
+    var cates = [{title:"VLT",id:1},{title:"Vacon",id:2},{title:"Holip",id:3},{title:"美图",id:4},{title:"风景",id:5}]
+    res.setHeader("Access-Control-Allow-Origin", "*")
+        return res.status(200).json({
+            err_code: 0,
+            data:cates,
+            message: '添加评论成功'
+        })
+})
+
 router.post('/api/connect', function (req, res) {
     if (req.body.connect == 'true') {
         console.log('请求连接变频器')
@@ -379,13 +389,98 @@ router.get('/api/getimages', function (req, res) {
         res.setHeader("Access-Control-Allow-Origin", "*")
         return res.status(200).json({
             err_code: 0,
-            data: {
+            data: { 
                 id: 666,
                 title: "Vacon NXC Grid Simulator",
                 zhaiyao: "The equipment is used for variable volatge and frequency source also for simulating grid drop. It is widely used to test solor and wind energy generation.",
                 img_url: "http://" + req.hostname + ":5000/" + 'public/images/1.jpg'
             },
             message: 'get images succeed.'
+        })
+    }else if(parseInt(req.query.cate_id) === 0){
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        return res.status(200).json({
+            err_code: 0,
+            data: [{
+                id: 1,
+                title: "VACON® NXP System Drive",
+                zhaiyao: "是一种经过完善综合配置的共直流母线变频器，可满足重工业需求，连续不停运行，维护时间极短。",
+                img_url: 'https://www.danfoss.com/media/1126/vacon-nxp-system-drive.jpg?anchor=center&mode=scale&width=515'
+            },{
+                id: 2,
+                title: "Welcome to Danfoss",
+                zhaiyao: "Great persons do Great jobs at Great places.",
+                img_url: 'https://www.danfoss.com/media/7000/danfoss-employees.jpg?anchor=center&mode=crop&width=1280&height=420'
+            },{
+                id: 3,
+                title: "Working at Danfoss",
+                zhaiyao: "a nice place to work. isn't it?",
+                img_url: "https://www.danfoss.com/media/6849/man-working-with-laptop-1120x742.jpg?anchor=center&mode=scale&width=810"
+            },
+            {
+                id: 4,
+                title: "Danfoss valve",
+                zhaiyao: "good quality and good price.",
+                img_url: "https://www.danfoss.com/media/4619/danfoss-ets-colibri-introduction-video.jpg?anchor=center&mode=crop&width=1920&height=420"
+            },{
+                id: 5,
+                title: "VLT® Refrigeration Drive FC 103",
+                zhaiyao: "专用于帮助大幅降低制冷系统的寿命周期成本。它可提高效能和可靠性，提供集成的过程控制功能和专门设计的调试环境，可满足制冷应用的需求。此外，它还设有使用常用制冷术语的安装向导。因此，制冷技术人员和安装人员可轻松、安全地进行安装和调试。",
+                img_url: "https://www.danfoss.com/media/7727/vlt_lvd_refrigerationdrive_fc103.jpg?anchor=center&mode=scale&width=515"
+            }],
+            message: 'get images succeed.'
+        })
+    }else if(parseInt(req.query.cate_id) === 1){
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        return res.status(200).json({
+            err_code: 0,
+            data: [{
+                id: 1,
+                title: " VLT® Midi Drive FC 280",
+                zhaiyao: "达到新的性能水平。通过广泛功能，从新的节省中获益。这些功能旨在以尽可能简单易用的方式安装、使用和维护变频器。",
+                img_url: 'https://www.danfoss.com/media/7730/vlt_lvd_midi_drivefc280.jpg?anchor=center&mode=scale&width=515'
+            },{
+                id: 2,
+                title: "VLT® AutomationDrive FC 301 / FC 302",
+                zhaiyao: "此变频器结构坚固，经久耐用，能有效可靠地操作，即使在要求最高的应用和最具挑战性的环境中也是如此。VLT® AutomationDrive 充分利用新数字时代必须提供的所有技术，以确保完全满足客户的应用需求并在整个使用寿命期内优化过程。",
+                img_url: 'https://www.danfoss.com/media/7728/vlt_lvd_automationdrivefc301_fc302.jpg?anchor=center&mode=scale&width=515'
+            },{
+                id: 3,
+                title: "VLT® Integrated Servo Drive ISD® 510",
+                zhaiyao: "VLT® Integrated Servo Drive ISD® 510 集伺服电机与伺服驱动器为一体。可在众多应用中提供巨大的优势，如转台、食品和药品的标签、封盖和包装装置。",
+                img_url: "https://www.danfoss.com/media/1105/vlt_integrated_servodrive_isd510.jpg?anchor=center&mode=scale&width=150"
+            }],
+            message: 'get images succeed.'
+        }) 
+    }else{
+        res.setHeader("Access-Control-Allow-Origin", "*")
+            return res.status(200).json({
+                err_code: 0,
+                data:[{
+                    id:1,
+                    title:"Danfoss welcome. 等待后台添加图片中......",
+                    img_url:"https://www.danfoss.com/static/images/logo.svg"
+                }],
+                message: 'get images succeed.'
+            })
+    }  
+})
+
+router.get('/api/getimageinfo', function(req,res){
+    console.log(parseInt(req.query.photo_id))
+    var data=[
+        {   id:parseInt(req.query.photo_id),
+            title:"VACON® NXP DC/DC Converter",
+            click:32,
+            add_time:"2015-04-15T04:52:15.000Z",
+            content:"为了通过更好地利用能源来提高性能，能源存储装置被越来越多地引入到系统中，以创建混合动力解决方案。目前有各种各样存储方法正在使用，但是，由于电池成本的降低和能量密度的增加，电池被视为当今增长最快、更容易集成的存储介质。DC-DC 变流器可用于连接到电池、超级电容器、燃料电池和太阳能电池板等电源。"
+        }]
+    if (req.body) {
+        res.setHeader("Access-Control-Allow-Origin", "*")
+        return res.status(200).json({
+            err_code: 0,
+            data:data,
+            message:'获取图片详情成功'
         })
     }
 
