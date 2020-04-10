@@ -18,6 +18,6 @@ app.use(bodyParser.json())
 // 把路由容器挂载到 app 服务中
 app.use(router)
 
-app.listen(5000, function () {
+app.listen(5000, function () { //可以配置第二个参数 '10.62.20.72' 使得服务运行在10.62.20.72上， 否则就是localhost
   console.log('running at 5000...')
 })
