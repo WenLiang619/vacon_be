@@ -502,4 +502,9 @@ router.get('/api/getimageinfo', function (req, res) {
 
 })
 
+router.get('/api/gettempe', function (req, res) {
+    
+
+})
+
 module.exports = router
