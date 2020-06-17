@@ -23,7 +23,7 @@ function heartBeat(register) {
 }
 
 socket.on('connect', function () {
-    var hearBeatHandler = setInterval(heartBeat, 4000, 10601)
+    var hearBeatHandler = setInterval(heartBeat, 4000, )
     heartTick = hearBeatHandler
     console.log('socket is connected.')
 })
@@ -503,7 +503,7 @@ router.get('/api/getimageinfo', function (req, res) {
 })
 
 router.get('/api/gettempe', function (req, res) {
-    
+
 
 })
 
