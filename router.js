@@ -408,7 +408,7 @@ router.get('/api/getimages', function (req, res) {
                 id: 666,
                 title: "Vacon NXC Grid Simulator",
                 zhaiyao: "The equipment is used for variable volatge and frequency source also for simulating grid drop. It is widely used to test solor and wind energy generation.",
-                img_url: "http://" + req.hostname + ":5000/" + 'public/images/1.jpg'
+                img_url: '/public/images/1.jpg'
             },
             message: 'get images succeed.'
         })

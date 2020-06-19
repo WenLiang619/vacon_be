@@ -5,8 +5,8 @@ var router = require('./router')
 
 var app = express()
 
-app.use('/public/images', express.static(path.join(__dirname, './public/images/')))
-app.use(express.static(path.join(__dirname, 'views')))
+app.use('/public/images', express.static(path.join(__dirname, './public/images/'))) //这样访问mlskd.cn:5000/public/images/1.jpg
+app.use(express.static(path.join(__dirname, 'views'))) //前端用webpack打包的代码放到这里部署到服务器，这样访问mlskd.cn:5000/index.html
 
 // 配置模板引擎和 解析表单POST请求插件body-parser 一定要在 app.use(router) 挂载路由之前
 // parse application/x-www-form-urlencoded
