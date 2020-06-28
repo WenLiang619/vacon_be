@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 
+var request = require('request')
 // create a tcp modbus client
 const Modbus = require('jsmodbus')
 const net = require('net')
@@ -502,8 +503,25 @@ router.get('/api/getimageinfo', function (req, res) {
 
 })
 
-router.get('/api/gettempe', function (req, res) {
+router.get('/api/gettemp', function (req, res) {
 
+    request({
+        url: 'http://api.heclouds.com/devices/607195994/datapoints?datastream_id=TYPE002-ID001&limit=10', //请求路径
+        method: "GET", //请求方式，默认为get
+        headers: { //设置请求头
+            "api-key": "biIEl0UkIr6Nj87A=ktluQyzT3Q=",
+        },
+        //body: JSON.stringify(requestData)//post参数字符串
+    }, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            res.setHeader("Access-Control-Allow-Origin", "*")
+            return res.status(200).json({
+                err_code: 0,
+                data: body,
+                message: '获取温度数据成功'
+            })
+        }
+    });
 
 })
 
